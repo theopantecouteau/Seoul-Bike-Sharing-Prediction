@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a1faad1-e0ee-4469-a8d7-60ee79c42df4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/src/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-modelling.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-modelling.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +27,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -80,7 +83,8 @@
       <workItem from="1701032173855" duration="113000" />
       <workItem from="1701032415370" duration="3000" />
       <workItem from="1701037440397" duration="652000" />
-      <workItem from="1701038526813" duration="1544000" />
+      <workItem from="1701038526813" duration="2344000" />
+      <workItem from="1701251342710" duration="2990000" />
     </task>
     <servers />
   </component>
