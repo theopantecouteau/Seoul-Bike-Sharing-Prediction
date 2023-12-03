@@ -8,8 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/prediction-app/src/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data-modelling.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-modelling.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data/seoul-bike-data-clean.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +56,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/theop/OneDrive/Documents/DEV/Python/scrapping_guilhem&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/theop/OneDrive/Documents/COURS/ESILV/A4/S7/MACHINE_LEARNING/TD&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -65,6 +68,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\app\prediction-app\src" />
       <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\data\data" />
       <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\data" />
     </key>
@@ -84,7 +88,12 @@
       <workItem from="1701032415370" duration="3000" />
       <workItem from="1701037440397" duration="652000" />
       <workItem from="1701038526813" duration="2344000" />
-      <workItem from="1701251342710" duration="2990000" />
+      <workItem from="1701251342710" duration="10072000" />
+      <workItem from="1701272680151" duration="5713000" />
+      <workItem from="1701328780759" duration="74000" />
+      <workItem from="1701330932130" duration="4085000" />
+      <workItem from="1701429689606" duration="1461000" />
+      <workItem from="1701622491164" duration="10015000" />
     </task>
     <servers />
   </component>
