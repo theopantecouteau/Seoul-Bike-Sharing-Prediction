@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>data-visualization.ipynb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #cc7832;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+data-visualization.ipynb</font>
+</center></td></tr></table>
+<pre><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">pandas </span><span class="s1">as </span><span class="s2">pd</span>
+<span class="s1">import </span><span class="s2">matplotlib.pyplot </span><span class="s1">as </span><span class="s2">plt</span>
+<span class="s1">import </span><span class="s2">seaborn </span><span class="s1">as </span><span class="s2">sns</span>
+<span class="s0">#%% 
+</span><span class="s2">df = pd.read_csv(</span><span class="s3">'./data/seoul-bike-data-clean-for-dataviz.csv'</span><span class="s2">)</span>
+<span class="s2">df.drop(columns=</span><span class="s3">&quot;Unnamed: 0&quot;</span><span class="s1">, </span><span class="s2">inplace=</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s0">#%% 
+</span><span class="s2">df.describe().T</span>
+<span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Hour&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s1">, </span><span class="s2">markers=</span><span class="s3">'o'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Hour&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Hour of the Day&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.grid(</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">We can see on the graph above that the rented bike count is at its lowest at 4am and at its highest at 6pm, with a local maximum at 8am and a local minimum at 2pm. 
+In fact, the rented bike count is as its highest during the commuting hours, which is not surprising. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.boxplot(x=</span><span class="s3">'Hour'</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">'Rented Bike Count'</span><span class="s1">, </span><span class="s2">data=df)</span>
+<span class="s2">plt.title(</span><span class="s3">'Bike Rentals Distribution by Hour'</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">'Hour of the Day'</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">'Rented Bike Count'</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Day&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s1">, </span><span class="s2">markers=</span><span class="s3">'o'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Day&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Day&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.grid(</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">No particular trend can be seen on the graph above. 
+</span><span class="s0">#%% 
+# 1. Rented Bike Count by Month</span>
+<span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Month&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s1">, </span><span class="s2">markers=</span><span class="s3">'o'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Month&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Month&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.grid(</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">We can see that the rented bike count is increasing from January to June, then decreasing from July to December. 
+It seems consistent with the fact that the weather is getting warmer from January to June, then colder from July to December. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Temperature(°C)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Average Temperature vs Temperature(°C)&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Temperature (°C)&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.grid(</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">As temperatures rise, bike rentals increase, suggesting that warmer weather encourages more people to rent bikes until 33°C, then the rented bike count decreases. 
+</span><span class="s0">#%% 
+</span><span class="s2">df.groupby(</span><span class="s3">'Seasons'</span><span class="s2">).sum()[</span><span class="s3">'Rented Bike Count'</span><span class="s2">].plot.pie(autopct=</span><span class="s3">'%1.1f%%'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Season&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">This pie chart demonstrates that bike rentals are fairly evenly distributed across the seasons, apart from Winter which is less popular. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.barplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Holiday&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Holiday&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Holiday ?&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">This bar graph appears to show that bike rental counts do not significantly differ between holidays and non-holidays, indicating consistent usage. 
+ 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.barplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;WeekDay&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by week day&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">This bar graph appears to show that bike rental counts do not significantly differ between week days, indicating consistent usage. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Rainfall(mm)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Rainfall&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Rainfall&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">Higher rainfall seems to correlate with a decrease in bike rentals, implying adverse weather conditions deter bike usage. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Snowfall (cm)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Snowfall&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+ </span><span class="s2">The presence of snowfall also seems to have a negative correlation with bike rentals, indicating inclement weather likely reduces the inclination or ability to rent bikes. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Humidity(%)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Humidity&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Humidity&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">The graph above shows that the rented bike count is at its lowest when the humidity is at its highest, and at its highest when the humidity is at its lowest. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Wind speed (m/s)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Wind speed&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Wind speed&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">The graph above shows that the rented bike count is at its lowest when the wind speed is at its highest, and at its highest when the wind speed is at its lowest. 
+The drastic increase in rented bike count around 7 m/S is probably due to a special day 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Visibility (10m)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Visibility&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Visibility&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">There is a pretty consistent distribution of rented bike count across the visibility range 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+<span class="s2">sns.lineplot(data=df</span><span class="s1">, </span><span class="s2">x=</span><span class="s3">&quot;Solar Radiation (MJ/m2)&quot;</span><span class="s1">, </span><span class="s2">y=</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Rented Bike Count by Solar Radiation&quot;</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Solar Radiation&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Rented Bike Count&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">In the same way, there is a pretty consistent distribution of rented bike count across the solar radiation range 
+</span><span class="s0">#%% 
+#loop on the column and display the boxplot</span>
+<span class="s1">for </span><span class="s2">col </span><span class="s1">in </span><span class="s2">df.columns:</span>
+    <span class="s2">plt.figure(figsize=(</span><span class="s4">12</span><span class="s1">, </span><span class="s4">6</span><span class="s2">))</span>
+    <span class="s2">sns.boxplot(x=col</span><span class="s1">, </span><span class="s2">data=df)</span>
+    <span class="s2">plt.title(</span><span class="s3">f'</span><span class="s1">{</span><span class="s2">col</span><span class="s1">} </span><span class="s3">Distribution'</span><span class="s2">)</span>
+    <span class="s2">plt.xlabel(col)</span>
+    <span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">This boxplot is interesting in our outlier analysis. We can see on some columns that there are some outliers, but they are not so far from the median. This confirms that our data is clean and our decision to keep the outliers was a good one.</span></pre>
+</body>
+</html>

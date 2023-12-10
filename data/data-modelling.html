@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>data-modelling.ipynb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #cc7832;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+data-modelling.ipynb</font>
+</center></td></tr></table>
+<pre><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">pandas </span><span class="s1">as </span><span class="s2">pd</span>
+<span class="s1">from </span><span class="s2">lazypredict.Supervised </span><span class="s1">import </span><span class="s2">LazyRegressor</span>
+<span class="s1">from </span><span class="s2">sklearn.ensemble </span><span class="s1">import </span><span class="s2">RandomForestRegressor</span>
+<span class="s1">from </span><span class="s2">sklearn.model_selection </span><span class="s1">import </span><span class="s2">train_test_split</span>
+<span class="s1">from </span><span class="s2">sklearn.metrics </span><span class="s1">import </span><span class="s2">mean_squared_error</span><span class="s1">, </span><span class="s2">mean_absolute_error</span><span class="s1">, </span><span class="s2">r2_score</span>
+<span class="s1">from </span><span class="s2">sklearn.model_selection </span><span class="s1">import </span><span class="s2">GridSearchCV</span>
+<span class="s0">#%% 
+</span><span class="s2">df = pd.read_csv(</span><span class="s3">'./data/seoul-bike-data-clean-for-model.csv'</span><span class="s1">, </span><span class="s2">encoding=</span><span class="s3">'unicode_escape'</span><span class="s2">)</span>
+<span class="s2">X = df.drop(</span><span class="s3">'Rented Bike Count'</span><span class="s1">, </span><span class="s2">axis=</span><span class="s4">1</span><span class="s2">)</span>
+<span class="s2">y = df[</span><span class="s3">'Rented Bike Count'</span><span class="s2">]</span>
+
+<span class="s2">X = X.select_dtypes(include=[</span><span class="s3">'float64'</span><span class="s1">, </span><span class="s3">'int64'</span><span class="s2">])</span>
+
+<span class="s2">X_train</span><span class="s1">, </span><span class="s2">X_test</span><span class="s1">, </span><span class="s2">y_train</span><span class="s1">, </span><span class="s2">y_test = train_test_split(X</span><span class="s1">, </span><span class="s2">y</span><span class="s1">, </span><span class="s2">test_size=</span><span class="s4">0.2</span><span class="s1">, </span><span class="s2">random_state=</span><span class="s4">42</span><span class="s2">)</span>
+<span class="s2">X_test</span>
+<span class="s0">#%% 
+</span><span class="s2">clf = LazyRegressor(verbose=</span><span class="s4">0</span><span class="s1">,</span><span class="s2">ignore_warnings=</span><span class="s1">True, </span><span class="s2">custom_metric=</span><span class="s1">None</span><span class="s2">)</span>
+<span class="s2">models2</span><span class="s1">, </span><span class="s2">predictions2 = clf.fit(X_train</span><span class="s1">, </span><span class="s2">X_test</span><span class="s1">, </span><span class="s2">y_train</span><span class="s1">, </span><span class="s2">y_test)</span>
+<span class="s2">print(models2)</span>
+<span class="s0">#%% md 
+</span><span class="s2">Now that we have our data, we can start building our model. We will use the `RandomForestRegressor` from `sklearn` to train our model. We will use GridSearchCV in order to find the best parameters for our model. 
+</span><span class="s0">#%% 
+</span><span class="s2">param_grid = {</span>
+    <span class="s3">'n_estimators'</span><span class="s2">: [</span><span class="s4">50</span><span class="s1">, </span><span class="s4">100</span><span class="s1">, </span><span class="s4">200</span><span class="s1">, </span><span class="s4">300</span><span class="s1">, </span><span class="s4">500</span><span class="s2">]</span><span class="s1">,</span>
+    <span class="s3">'min_samples_split'</span><span class="s2">: [</span><span class="s4">2</span><span class="s1">, </span><span class="s4">5</span><span class="s1">, </span><span class="s4">10</span><span class="s2">]</span><span class="s1">,</span>
+    <span class="s3">'min_samples_leaf'</span><span class="s2">: range(</span><span class="s4">1</span><span class="s1">,</span><span class="s4">10</span><span class="s2">)</span><span class="s1">,</span>
+    <span class="s3">'max_features'</span><span class="s2">: [</span><span class="s3">'auto'</span><span class="s1">, </span><span class="s3">'sqrt'</span><span class="s1">, </span><span class="s3">'log2'</span><span class="s2">]</span><span class="s1">,</span>
+    <span class="s3">'bootstrap'</span><span class="s2">: [</span><span class="s1">True, False</span><span class="s2">]</span>
+<span class="s2">}</span>
+
+<span class="s2">rf = RandomForestRegressor()</span>
+
+<span class="s2">grid_search = GridSearchCV(estimator = rf</span><span class="s1">, </span><span class="s2">param_grid = param_grid</span><span class="s1">,</span>
+                          <span class="s2">cv = </span><span class="s4">3</span><span class="s1">, </span><span class="s2">n_jobs = -</span><span class="s4">1</span><span class="s1">, </span><span class="s2">verbose = </span><span class="s4">2</span><span class="s1">, </span><span class="s2">scoring=</span><span class="s3">'r2'</span><span class="s2">)</span>
+
+<span class="s2">grid_search.fit(X_train</span><span class="s1">, </span><span class="s2">y_train)</span>
+
+<span class="s0"># Best parameters</span>
+<span class="s2">best_params = grid_search.best_params_</span>
+<span class="s2">print(</span><span class="s3">&quot;Best parameters:&quot;</span><span class="s1">, </span><span class="s2">best_params)</span>
+<span class="s0">#%% md 
+</span><span class="s2">Now that we have our best parameters, we can train our model using these parameters. 
+</span><span class="s0">#%% 
+</span><span class="s2">model = RandomForestRegressor(**best_params</span><span class="s1">, </span><span class="s2">random_state=</span><span class="s4">42</span><span class="s2">)</span>
+
+<span class="s2">model.fit(X_train</span><span class="s1">, </span><span class="s2">y_train)</span>
+<span class="s0">#%% md 
+</span><span class="s2">Now that we have trained our model, we can make predictions on the test set and evaluate the model. 
+</span><span class="s0">#%% 
+</span><span class="s2">predictions = model.predict(X_test)</span>
+
+<span class="s2">mse = mean_squared_error(y_test</span><span class="s1">, </span><span class="s2">predictions)</span>
+<span class="s2">mae = mean_absolute_error(y_test</span><span class="s1">, </span><span class="s2">predictions)</span>
+<span class="s2">r2 = r2_score(y_test</span><span class="s1">, </span><span class="s2">predictions)</span>
+
+<span class="s2">print(</span><span class="s3">f&quot;Mean Squared Error: </span><span class="s1">{</span><span class="s2">mse</span><span class="s1">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+<span class="s2">print(</span><span class="s3">f&quot;Mean Absolute Error: </span><span class="s1">{</span><span class="s2">mae</span><span class="s1">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+<span class="s2">print(</span><span class="s3">f&quot;R^2 Score: </span><span class="s1">{</span><span class="s2">r2</span><span class="s1">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+<span class="s0">#%% md 
+</span><span class="s2">The r² score of 0.92 indicates that our model is a good fit for the data. Let's plot the predictions vs actual to get a better idea of how our model is performing. 
+</span><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">matplotlib.pyplot </span><span class="s1">as </span><span class="s2">plt</span>
+<span class="s1">import </span><span class="s2">seaborn </span><span class="s1">as </span><span class="s2">sns</span>
+
+<span class="s2">plt.figure(figsize=(</span><span class="s4">10</span><span class="s1">, </span><span class="s4">10</span><span class="s2">))</span>
+<span class="s2">sns.regplot(x=predictions</span><span class="s1">, </span><span class="s2">y=y_test</span><span class="s1">, </span><span class="s2">fit_reg=</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s2">plt.xlabel(</span><span class="s3">&quot;Predictions&quot;</span><span class="s2">)</span>
+<span class="s2">plt.ylabel(</span><span class="s3">&quot;Actual&quot;</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Predictions vs Actual&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">We see that our model is doing a good job of predicting the target variable apart from a few points. Let's plot the feature importance to see which features are the most important. 
+</span><span class="s0">#%% 
+</span><span class="s2">plt.figure(figsize=(</span><span class="s4">10</span><span class="s1">, </span><span class="s4">10</span><span class="s2">))</span>
+<span class="s2">feat_importances = pd.Series(model.feature_importances_</span><span class="s1">, </span><span class="s2">index=X.columns)</span>
+<span class="s2">feat_importances.nlargest(</span><span class="s4">20</span><span class="s2">).plot(kind=</span><span class="s3">'barh'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">&quot;Feature Importance&quot;</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span><span class="s2">We see that the `Hour` feature is the most important feature. This makes sense as the number of bikes rented will depend on the hour of the day. The `Temperature` feature is also important as the number of persons who rent a bike will depend on the temperature.The `Month` and `Seasons`are also important features as the weather conditions generally depends on the month and season. 
+</span><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">pickle</span>
+<span class="s2">pickle.dump(model</span><span class="s1">, </span><span class="s2">open(</span><span class="s3">'model.pkl'</span><span class="s1">, </span><span class="s3">'wb'</span><span class="s2">))</span>
+<span class="s0">#%% md 
+</span><span class="s2">We save our model for our web app. We will use this model to make predictions on the web app.</span></pre>
+</body>
+</html>
