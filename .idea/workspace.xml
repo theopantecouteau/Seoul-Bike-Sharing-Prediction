@@ -6,13 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0a1faad1-e0ee-4469-a8d7-60ee79c42df4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/prediction-app/src/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-modelling.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-modelling.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-visualization.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data/seoul-bike-data-clean.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,10 @@
       <workItem from="1701328780759" duration="74000" />
       <workItem from="1701330932130" duration="4085000" />
       <workItem from="1701429689606" duration="1461000" />
-      <workItem from="1701622491164" duration="10015000" />
+      <workItem from="1701622491164" duration="10619000" />
+      <workItem from="1701867454007" duration="5666000" />
+      <workItem from="1702022508160" duration="1152000" />
+      <workItem from="1702204803024" duration="13350000" />
     </task>
     <servers />
   </component>
