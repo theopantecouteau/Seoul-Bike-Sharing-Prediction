@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>data-cleaning-preparation .ipynb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #cc7832;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+data-cleaning-preparation .ipynb</font>
+</center></td></tr></table>
+<pre><span class="s0">#%% 
+</span><span class="s1">import </span><span class="s2">pandas </span><span class="s1">as </span><span class="s2">pd</span>
+<span class="s1">import </span><span class="s2">numpy </span><span class="s1">as </span><span class="s2">np</span>
+<span class="s1">import </span><span class="s2">matplotlib.pyplot </span><span class="s1">as </span><span class="s2">plt</span>
+<span class="s1">import </span><span class="s2">seaborn </span><span class="s1">as </span><span class="s2">sns</span>
+<span class="s1">import </span><span class="s2">os</span>
+<span class="s1">import </span><span class="s2">sys</span>
+<span class="s1">import </span><span class="s2">re</span>
+<span class="s1">import </span><span class="s2">datetime</span>
+<span class="s1">from </span><span class="s2">sklearn.preprocessing </span><span class="s1">import </span><span class="s2">OneHotEncoder</span><span class="s1">, </span><span class="s2">LabelEncoder</span>
+<span class="s0">#%% 
+</span><span class="s2">df = pd.read_csv(</span><span class="s3">'./data/seoul-bike-data.csv'</span><span class="s1">, </span><span class="s2">encoding=</span><span class="s3">'unicode_escape'</span><span class="s2">)</span>
+<span class="s2">df.head()</span>
+<span class="s0">#%% md 
+</span><span class="s2"># Data Exploration 
+</span><span class="s0">#%% 
+</span><span class="s2">display(df.info())</span>
+<span class="s2">display(df.describe().T)</span>
+<span class="s2">display(df.isnull().sum())</span>
+<span class="s0">#%% md 
+</span><span class="s2">At first glance, the data appears to be clean, most variables are well typed. We can also see that some columns have class values, which we'll need to encode later. 
+</span><span class="s0">#%% md 
+</span><span class="s2">Here we can see that we'll need to change the type of the &quot;Date&quot; column, as well as encode the &quot;Season&quot;, &quot;Holiday&quot; and &quot;Functional Day&quot; columns. 
+We can also see that we'll need to normalize the values to ensure consistency in their interpretation. 
+Finally, there are no missing values 
+</span><span class="s0">#%% 
+</span><span class="s2">hourly_counts = df.groupby(</span><span class="s3">'Date'</span><span class="s2">)[</span><span class="s3">'Hour'</span><span class="s2">].nunique()</span>
+<span class="s2">dates_with_incomplete_hours = hourly_counts[hourly_counts != </span><span class="s4">24</span><span class="s2">]</span>
+<span class="s2">print(</span><span class="s3">&quot;Number of dates with incomplete hourly data:&quot;</span><span class="s1">, </span><span class="s2">len(dates_with_incomplete_hours))</span>
+<span class="s0">#%% md 
+</span><span class="s2">So we have verified that for every date in the dataset, we have 24 different hourly records. This is important because we'll be using the date and hour columns to index the dataset. 
+</span><span class="s0">#%% 
+</span><span class="s2">min_date = df[</span><span class="s3">'Date'</span><span class="s2">].min()</span>
+<span class="s2">max_date = df[</span><span class="s3">'Date'</span><span class="s2">].max()</span>
+<span class="s2">all_dates = pd.date_range(start=min_date</span><span class="s1">, </span><span class="s2">end=max_date</span><span class="s1">, </span><span class="s2">freq=</span><span class="s3">'D'</span><span class="s2">)</span>
+<span class="s2">df[</span><span class="s3">'Date'</span><span class="s2">] = pd.to_datetime(df[</span><span class="s3">'Date'</span><span class="s2">]</span><span class="s1">, </span><span class="s2">format=</span><span class="s3">'%d/%m/%Y'</span><span class="s2">)</span>
+<span class="s2">missing_dates = all_dates.difference(df[</span><span class="s3">'Date'</span><span class="s2">])</span>
+<span class="s2">print(</span><span class="s3">f&quot;There are </span><span class="s1">{</span><span class="s2">len(missing_dates)</span><span class="s1">} </span><span class="s3">missing dates in the range&quot;</span><span class="s2">)</span>
+<span class="s0">#%% md 
+</span><span class="s2"># Data Cleaning 
+</span><span class="s0">#%% md 
+</span><span class="s2">We know now that there are no missing dates in the range, so we can proceed to index the dataset by date and hour. 
+</span><span class="s0">#%% 
+</span><span class="s2">df[</span><span class="s3">'Day'</span><span class="s2">] = df[</span><span class="s3">'Date'</span><span class="s2">].dt.day</span>
+<span class="s2">df[</span><span class="s3">'Month'</span><span class="s2">] = df[</span><span class="s3">'Date'</span><span class="s2">].dt.month</span>
+<span class="s2">df[</span><span class="s3">'Year'</span><span class="s2">] = df[</span><span class="s3">'Date'</span><span class="s2">].dt.year</span>
+<span class="s2">df[</span><span class="s3">'WeekDay'</span><span class="s2">]=df[</span><span class="s3">'Date'</span><span class="s2">].dt.day_name()</span>
+<span class="s2">df.drop(columns=[</span><span class="s3">'Date'</span><span class="s2">]</span><span class="s1">, </span><span class="s2">inplace=</span><span class="s1">True</span><span class="s2">)</span>
+<span class="s0">#%% md 
+</span><span class="s2">We can now drop the &quot;Date&quot; column, as we have extracted all the information we need from it. 
+It will be more easy to analyze the data by day and month now. Also, we add a column for the day of the week, which will be useful for the analysis. 
+ 
+</span><span class="s0">#%% 
+# Select only numerical columns for correlation matrix</span>
+<span class="s2">numerical_cols = df.select_dtypes(include=[</span><span class="s3">'float64'</span><span class="s1">, </span><span class="s3">'int64'</span><span class="s2">]).columns</span>
+<span class="s2">plt.figure(figsize=(</span><span class="s4">10</span><span class="s1">, </span><span class="s4">8</span><span class="s2">))</span>
+<span class="s2">sns.heatmap(df[numerical_cols].corr()</span><span class="s1">, </span><span class="s2">annot=</span><span class="s1">True, </span><span class="s2">cmap=</span><span class="s3">'coolwarm'</span><span class="s1">, </span><span class="s2">fmt=</span><span class="s3">'.2f'</span><span class="s2">)</span>
+<span class="s2">plt.title(</span><span class="s3">'Correlation Matrix'</span><span class="s2">)</span>
+<span class="s2">plt.show()</span>
+<span class="s0">#%% md 
+</span>
+<span class="s2">Thanks to this correlation matrix, we can see that there is a strong correlation between the temperature and the dew point temperature, which is to be expected. Thus we can delete the dew point temperature column. 
+</span><span class="s0">#%% 
+</span><span class="s2">df = df.drop(columns=[</span><span class="s3">'Dew point temperature(°C)'</span><span class="s2">])</span>
+<span class="s0">#%% md 
+</span><span class="s2">We have to check if there are any outliers in the data. And delete them if necessary. 
+</span><span class="s0">#%% 
+</span>
+<span class="s2">outlier_summary = {}</span>
+<span class="s2">numerical_cols = numerical_cols.drop(</span><span class="s3">&quot;Dew point temperature(°C)&quot;</span><span class="s2">)</span>
+<span class="s0"># Loop through each column in the dataset</span>
+<span class="s1">for </span><span class="s2">column </span><span class="s1">in </span><span class="s2">numerical_cols:</span>
+    <span class="s2">Q1 = df[column].quantile(</span><span class="s4">0.25</span><span class="s2">)</span>
+    <span class="s2">Q3 = df[column].quantile(</span><span class="s4">0.75</span><span class="s2">)</span>
+    <span class="s2">IQR = Q3 - Q1</span>
+    <span class="s2">lower_bound = Q1 - </span><span class="s4">1.5 </span><span class="s2">* IQR</span>
+    <span class="s2">upper_bound = Q3 + </span><span class="s4">1.5 </span><span class="s2">* IQR</span>
+
+    <span class="s0"># Count the number of outliers</span>
+    <span class="s2">outliers = df[(df[column] &lt; lower_bound) | (df[column] &gt; upper_bound)]</span>
+    <span class="s2">outlier_count = outliers.shape[</span><span class="s4">0</span><span class="s2">]</span>
+    <span class="s2">plt.plot(df[column]</span><span class="s1">, </span><span class="s3">'o'</span><span class="s1">, </span><span class="s2">label=column)</span>
+    <span class="s2">plt.plot([</span><span class="s4">0</span><span class="s1">, </span><span class="s2">len(df)]</span><span class="s1">, </span><span class="s2">[lower_bound</span><span class="s1">, </span><span class="s2">lower_bound]</span><span class="s1">, </span><span class="s3">'r--'</span><span class="s1">, </span><span class="s2">label=</span><span class="s3">'lower bound'</span><span class="s2">)</span>
+    <span class="s2">plt.plot([</span><span class="s4">0</span><span class="s1">, </span><span class="s2">len(df)]</span><span class="s1">, </span><span class="s2">[upper_bound</span><span class="s1">, </span><span class="s2">upper_bound]</span><span class="s1">, </span><span class="s3">'r--'</span><span class="s1">, </span><span class="s2">label=</span><span class="s3">'upper bound'</span><span class="s2">)</span>
+    <span class="s2">plt.legend()</span>
+    <span class="s2">plt.title(</span><span class="s3">f'</span><span class="s1">{</span><span class="s2">column</span><span class="s1">} </span><span class="s3">(</span><span class="s1">{</span><span class="s2">outlier_count</span><span class="s1">} </span><span class="s3">outliers)'</span><span class="s2">)</span>
+    <span class="s2">plt.show()</span>
+    <span class="s0"># Store the outlier count for each column</span>
+    <span class="s2">outlier_summary[column] = outlier_count</span>
+
+<span class="s2">outlier_summary</span>
+<span class="s0">#%% md 
+</span><span class="s2">We see that there are some outliers on a few columns but there all are not too far from the upper bound. So we decide to keep them. They might be important for the model. Indeed, these outliers don't seem to be errors, but rather extreme values that are possible in real life. 
+</span><span class="s0">#%% 
+</span><span class="s2">df.to_csv(</span><span class="s3">&quot;./data/seoul-bike-data-clean-for-dataviz.csv&quot;</span><span class="s2">)</span>
+<span class="s0">#%% md 
+</span><span class="s2"># Data Preparation 
+</span><span class="s0">#%% md 
+</span><span class="s2">For the modelling part, we'll need to encode the categorical variables. 
+</span><span class="s0">#%% 
+</span><span class="s2">df[</span><span class="s3">'Holiday'</span><span class="s2">] = df[</span><span class="s3">'Holiday'</span><span class="s2">].map({</span><span class="s3">'Holiday'</span><span class="s2">: </span><span class="s4">1</span><span class="s1">, </span><span class="s3">'No Holiday'</span><span class="s2">: </span><span class="s4">0</span><span class="s2">})</span>
+<span class="s2">df[</span><span class="s3">'Functioning Day'</span><span class="s2">] = df[</span><span class="s3">'Functioning Day'</span><span class="s2">].map({</span><span class="s3">'Yes'</span><span class="s2">: </span><span class="s4">1</span><span class="s1">, </span><span class="s3">'No'</span><span class="s2">: </span><span class="s4">0</span><span class="s2">})</span>
+<span class="s2">dict_day_of_week={</span><span class="s3">'Monday'</span><span class="s2">:</span><span class="s4">1</span><span class="s1">,</span><span class="s3">'Tuesday'</span><span class="s2">:</span><span class="s4">2</span><span class="s1">,</span><span class="s3">'Wednesday'</span><span class="s2">:</span><span class="s4">3</span><span class="s1">,</span><span class="s3">'Thursday'</span><span class="s2">:</span><span class="s4">4</span><span class="s1">,</span><span class="s3">'Friday'</span><span class="s2">:</span><span class="s4">5</span><span class="s1">,</span><span class="s3">'Saturday'</span><span class="s2">:</span><span class="s4">6</span><span class="s1">,</span><span class="s3">'Sunday'</span><span class="s2">:</span><span class="s4">7</span><span class="s2">}</span>
+<span class="s2">df[</span><span class="s3">'WeekDay'</span><span class="s2">]=df[</span><span class="s3">'WeekDay'</span><span class="s2">].map(dict_day_of_week)</span>
+<span class="s2">dict_season = {</span><span class="s3">'Winter'</span><span class="s2">: </span><span class="s4">1</span><span class="s1">, </span><span class="s3">'Spring'</span><span class="s2">: </span><span class="s4">2</span><span class="s1">, </span><span class="s3">'Summer'</span><span class="s2">: </span><span class="s4">3</span><span class="s1">, </span><span class="s3">'Autumn'</span><span class="s2">: </span><span class="s4">4</span><span class="s2">}</span>
+<span class="s2">df[</span><span class="s3">'Seasons'</span><span class="s2">] = df[</span><span class="s3">'Seasons'</span><span class="s2">].map(dict_season)</span>
+<span class="s0">#%% 
+</span><span class="s1">from </span><span class="s2">sklearn.preprocessing </span><span class="s1">import </span><span class="s2">StandardScaler</span>
+<span class="s1">import </span><span class="s2">pickle</span>
+<span class="s2">columns_to_scale = [</span><span class="s3">'Temperature(°C)'</span><span class="s1">, </span><span class="s3">'Humidity(%)'</span><span class="s1">, </span><span class="s3">'Wind speed (m/s)'</span><span class="s1">, </span><span class="s3">'Visibility (10m)'</span><span class="s1">, </span><span class="s3">'Solar Radiation (MJ/m2)'</span><span class="s1">,  </span><span class="s3">'Rainfall(mm)'</span><span class="s1">, </span><span class="s3">'Snowfall (cm)'</span><span class="s2">]</span>
+<span class="s2">features_scaler = StandardScaler()</span>
+<span class="s2">df[columns_to_scale] = features_scaler.fit_transform(df[columns_to_scale])</span>
+<span class="s2">target_feature = StandardScaler()</span>
+<span class="s2">print(df[[</span><span class="s3">'Rented Bike Count'</span><span class="s2">]].head())</span>
+<span class="s2">df[</span><span class="s3">'Rented Bike Count'</span><span class="s2">] = target_feature.fit_transform(df[[</span><span class="s3">'Rented Bike Count'</span><span class="s2">]])</span>
+<span class="s2">print(df[[</span><span class="s3">'Rented Bike Count'</span><span class="s2">]].head())</span>
+<span class="s2">pickle.dump(features_scaler</span><span class="s1">, </span><span class="s2">open(</span><span class="s3">'./features_scaler.pkl'</span><span class="s1">, </span><span class="s3">'wb'</span><span class="s2">))</span>
+<span class="s2">pickle.dump(target_feature</span><span class="s1">, </span><span class="s2">open(</span><span class="s3">'./target_scaler.pkl'</span><span class="s1">, </span><span class="s3">'wb'</span><span class="s2">))</span>
+<span class="s0">#%% md 
+</span><span class="s2">We have decided to normalize the data, in order to have a better accuracy for the model. Even if we use a random forest model, which is a scale-invariant model, we stiil need to normalize the data to minimize the RMSE and MAE. 
+We also encone the categorical variables, in order to have a better accuracy for the model. 
+To finish we save the two scaler in order to use them in the prediction part. 
+</span><span class="s0">#%% 
+</span><span class="s2">df.head()</span>
+<span class="s0">#%% 
+</span><span class="s2">df.to_csv(</span><span class="s3">'./data/seoul-bike-data-clean-for-model.csv'</span><span class="s1">, </span><span class="s2">index=</span><span class="s1">False</span><span class="s2">)</span></pre>
+</body>
+</html>
