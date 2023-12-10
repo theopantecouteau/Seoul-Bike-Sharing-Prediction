@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0a1faad1-e0ee-4469-a8d7-60ee79c42df4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/Form.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/prediction-app/src/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/prediction-app/src/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-cleaning-preparation .ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-modelling.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-modelling.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-visualization.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-visualization.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data/seoul-bike-data-clean.csv" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d16ca0e9-be20-449d-a66c-9adc7746b899" />
+        <option name="url" value="https://github.com/theopantecouteau/data-visualization.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Y4owt9V7U5kUI825bSxfzIhp5l" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/theop/OneDrive/Documents/COURS/ESILV/A4/S7/MACHINE_LEARNING/TD&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\app\prediction-app\src" />
+      <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\data\data" />
+      <recent name="C:\Users\theop\OneDrive\Documents\COURS\ESILV\A4\S7\PYTHON_FOR_DATA\PROJECT\data-visualization\data" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a1faad1-e0ee-4469-a8d7-60ee79c42df4" name="Changes" comment="" />
+      <created>1699794454590</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699794454590</updated>
+      <workItem from="1699794456423" duration="12423000" />
+      <workItem from="1700055342025" duration="461000" />
+      <workItem from="1700725498352" duration="1298000" />
+      <workItem from="1701032173855" duration="113000" />
+      <workItem from="1701032415370" duration="3000" />
+      <workItem from="1701037440397" duration="652000" />
+      <workItem from="1701038526813" duration="2344000" />
+      <workItem from="1701251342710" duration="10072000" />
+      <workItem from="1701272680151" duration="5713000" />
+      <workItem from="1701328780759" duration="74000" />
+      <workItem from="1701330932130" duration="4085000" />
+      <workItem from="1701429689606" duration="1461000" />
+      <workItem from="1701622491164" duration="10015000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

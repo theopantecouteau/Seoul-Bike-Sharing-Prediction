@@ -1,0 +1,117 @@
+/* Base styling for the form */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f7f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for all input fields and select boxes */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Hover and focus states for inputs */
+input[type="text"]:hover,
+input[type="text"]:focus,
+select:hover,
+select:focus {
+    border-color: #5d9cec;
+}
+
+/* Styling for labels */
+label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Styling the submit button */
+button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for select elements */
+select {
+    background-color: #e6e6e6;
+}
+
+/* Placeholder color */
+::placeholder {
+    color: #a0b1c5;
+}
+
+/* Ensures the form elements do not look too large on smaller screens */
+@media screen and (max-width: 600px) {
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #e8f0fe;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d0e2ff;
+}
+
+/* Optional: Animation for when the result appears */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.result {
+    animation: fadeIn 0.5s;
+}
+
+/* Style for the overlay */
+.loading-overlay {
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    backdrop-filter: blur(5px); /* Blur the background */
+    display: flex;
+    justify-content: center; /* Center the child horizontally */
+    align-items: center; /* Center the child vertically */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+/* Style for the loading GIF */
+.loading-gif {
+    width: 100px; /* Adjust the size as needed */
+    height: auto;
+    display: block;
+}
