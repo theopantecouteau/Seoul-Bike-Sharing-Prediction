@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Seoul Bike Sharing Demand Analysis
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
+This project focuses on analyzing and predicting bike sharing demand in Seoul. Using data from the Seoul Bike Sharing system, the objective is to understand the factors influencing bike rental patterns and to build a predictive model to forecast demand. This analysis is crucial for efficient management of the bike-sharing system, ensuring that bikes are available where and when they are needed most.
 
-## Available Scripts
+## Data Source
+The dataset used in this project is the Seoul Bike Sharing Demand dataset, which includes hourly rental data along with weather and seasonal information. https://archive.ics.uci.edu/dataset/560/seoul+bike+sharing+demand
 
-In the project directory, you can run:
+## Data Cleaning/Preparation
+The initial step involved cleaning the data, which normally includes handling missing values and anomalies. 
+However, the dataset used in this project was already clean and did not require any cleaning.
+Moreover, outliers were not removed as they were not considered to be erroneous data points.
 
-### `npm start`
+## Exploratory Data Analysis (EDA)
+Exploratory Data Analysis was conducted to uncover trends, patterns, and anomalies in the data. This included:
+- Analyzing rental trends over time - daily, weekly, and seasonal variations.
+- Correlation analysis between different variables.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Modeling
+For predicting bike rental demand:
+- Use of LazyPredict to evaluate the performance of different models.
+- Use of GridSearchCV to tune hyperparameters for the best performing models.
+- Finally, use of RandomForestRegressor, the model with the best performance we already know.
+- The models were trained on historical data, considering features like weather conditions, time, and seasonality.
+- Model performance was evaluated using metrics such as RSE (Root Mean Squared Error) and MAE (Mean Absolute Error).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Results
+- The project successfully identified key determinants of bike sharing demand in Seoul.
+- The Random Forest Regressor model was able to predict bike rental demand with a r² score of 0.91.
+- Findings indicated that weather conditions, temperature, and time of day are significant predictors of bike rental demand.
 
-### `npm test`
+## Predictions App
+The project also includes a web app that allows users to input weather conditions and seasonal data to predict bike rental demand.
+- Use of fastAPI to create the API in a couple of lines of code.
+- use of React to create the front-end of the app. (form, error handling, etc.)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run the Notebooks
+1. Ensure Python 3.x is installed.
+2. Install necessary libraries for the notebook: `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `lazypredict`.
+3. Install necessary libraries for the app: `fastapi`, `uvicorn`, `requests`, `react`, `node.js`.
+3. Clone the repository and navigate to the project directory.
+4. Run the Jupyter notebooks in order: `data-cleaning-preparation.ipynb`, `data-visualization.ipynb`, `data-modelling.ipynb`.
 
-### `npm run build`
+(Include a `requirements.txt` file for easy installation of dependencies.)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Future Work
+Future enhancements can include:
+- Incorporating real-time weather data for dynamic prediction.
+- Exploring deep learning models for improved forecasting accuracy.
+- Analyzing the impact of special events and holidays on bike rental demand.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contact Information
+Hugo Sequier - Theo Pantecouteau
